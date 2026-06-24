@@ -23,7 +23,7 @@ from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
-
+from launch.actions import SetEnvironmentVariable
 
 def generate_launch_description():
     launch_file_dir = os.path.join(get_package_share_directory('navigation_2floor_env'), 'launch')
@@ -34,7 +34,7 @@ def generate_launch_description():
     # y_pose = LaunchConfiguration('y_pose', default='-9.0')
     # z_pose = LaunchConfiguration('z_pose', default='3.2')
     x_pose = LaunchConfiguration('x_pose', default='0.0')
-    y_pose = LaunchConfiguration('y_pose', default='9.0')
+    y_pose = LaunchConfiguration('y_pose', default='-9.0')
     z_pose = LaunchConfiguration('z_pose', default='0.15')
 
 

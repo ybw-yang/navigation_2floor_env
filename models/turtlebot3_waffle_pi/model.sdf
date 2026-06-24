@@ -92,7 +92,6 @@
         </imu>
         <plugin name="turtlebot3_imu" filename="libgazebo_ros_imu_sensor.so">
           <ros>
-            <!-- <namespace>/tb3</namespace> -->
             <remapping>~/out:=imu</remapping>
           </ros>
         </plugin>
@@ -136,25 +135,70 @@
           <diffuse>0.2 0.2 0.2 1.0</diffuse>
         </material>
       </visual>
+    </link>
 
-      <sensor name="hls_lfcd_lds" type="ray">
+    <!-- Front LiDAR Link - 360x90, 朝前 -->
+    <link name="front_lidar_link">
+      <inertial>
+        <pose>0.1 0 0.15 0 0 0</pose>
+        <inertia>
+          <ixx>0.0001</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.0001</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.0001</izz>
+        </inertia>
+        <mass>0.05</mass>
+      </inertial>
+
+      <collision name="front_lidar_collision">
+        <pose>0.1 0 0.15 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.03</radius>
+            <length>0.04</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name="front_lidar_visual">
+        <pose>0.1 0 0.15 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.03</radius>
+            <length>0.04</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.8 1.0</ambient>
+          <diffuse>0.1 0.1 0.8 1.0</diffuse>
+        </material>
+      </visual>
+
+      <sensor name="front_lidar" type="ray">
         <always_on>true</always_on>
         <visualize>true</visualize>
-        <pose>-0.064 0 0.121 0 0 0</pose>
-        <update_rate>5</update_rate>
+        <pose>0.1 0 0.15 0 -1.5708 0</pose>
+        <update_rate>10</update_rate>
         <ray>
           <scan>
             <horizontal>
-              <samples>360</samples>
-              <resolution>1.000000</resolution>
-              <min_angle>0.000000</min_angle>
-              <max_angle>6.280000</max_angle>
+              <samples>720</samples>
+              <resolution>1.0</resolution>
+              <min_angle>-3.14159</min_angle>
+              <max_angle>3.14159</max_angle>
             </horizontal>
+            <vertical>
+              <samples>32</samples>
+              <min_angle>-1.57</min_angle>
+              <max_angle>0.0</max_angle>
+            </vertical>
           </scan>
           <range>
-            <min>0.120000</min>
-            <max>3.5</max>
-            <resolution>0.015000</resolution>
+            <min>0.1</min>
+            <max>12.0</max>
+            <resolution>0.01</resolution>
           </range>
           <noise>
             <type>gaussian</type>
@@ -162,13 +206,91 @@
             <stddev>0.01</stddev>
           </noise>
         </ray>
-        <plugin name="turtlebot3_laserscan" filename="libgazebo_ros_ray_sensor.so">
+        <plugin name="front_lidar_plugin" filename="libgazebo_ros_ray_sensor.so">
           <ros>
-            <!-- <namespace>/tb3</namespace> -->
-            <remapping>~/out:=scan</remapping>
+            <remapping>~/out:=front_scan</remapping>
           </ros>
           <output_type>sensor_msgs/LaserScan</output_type>
-          <frame_name>base_scan</frame_name>
+          <frame_name>front_lidar_link</frame_name>
+        </plugin>
+      </sensor>
+    </link>
+
+    <!-- Back LiDAR Link - 360x90, 朝后 -->
+    <link name="back_lidar_link">
+      <inertial>
+        <pose>-0.18 0 0.15 0 0 0</pose>
+        <inertia>
+          <ixx>0.0001</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.0001</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.0001</izz>
+        </inertia>
+        <mass>0.05</mass>
+      </inertial>
+
+      <collision name="back_lidar_collision">
+        <pose>-0.18 0 0.15 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.03</radius>
+            <length>0.04</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name="back_lidar_visual">
+        <pose>-0.18 0 0.15 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.03</radius>
+            <length>0.04</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.8 0.1 0.1 1.0</ambient>
+          <diffuse>0.8 0.1 0.1 1.0</diffuse>
+        </material>
+      </visual>
+
+      <sensor name="back_lidar" type="ray">
+        <always_on>true</always_on>
+        <visualize>true</visualize>
+        <pose>-0.18 0 0.15 0 -1.5708 0</pose>
+        <update_rate>10</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>720</samples>
+              <resolution>1.0</resolution>
+              <min_angle>-3.14159</min_angle>
+              <max_angle>3.14159</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>32</samples>
+              <min_angle>0</min_angle>
+              <max_angle>1.57</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>12.0</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </ray>
+        <plugin name="back_lidar_plugin" filename="libgazebo_ros_ray_sensor.so">
+          <ros>
+            <remapping>~/out:=back_scan</remapping>
+          </ros>
+          <output_type>sensor_msgs/LaserScan</output_type>
+          <frame_name>back_lidar_link</frame_name>
         </plugin>
       </sensor>
     </link>
@@ -471,6 +593,24 @@
       </axis>
     </joint>
 
+    <joint name="front_lidar_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>front_lidar_link</child>
+      <pose>0.18 0 0.15 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
+    <joint name="back_lidar_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>back_lidar_link</child>
+      <pose>-0.18 0 0.15 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+      </axis>
+    </joint>
+
     <joint name="camera_joint" type="fixed">
       <parent>base_link</parent>
       <child>camera_link</child>
@@ -524,7 +664,6 @@
 
     <plugin name="turtlebot3_joint_state" filename="libgazebo_ros_joint_state_publisher.so">
       <ros>
-        <!-- <namespace>/tb3</namespace> -->
         <remapping>~/out:=joint_states</remapping>
       </ros>
       <update_rate>30</update_rate>
