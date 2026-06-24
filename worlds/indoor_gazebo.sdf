@@ -4,6 +4,13 @@
     <include><uri>model://sun</uri></include>
     <include><uri>model://ground_plane</uri></include>
 
+    <gui>
+      <camera name="user_camera">
+        <pose>0 -30 3 0 0.0 1.57</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+
     <model name="two_story_building">
       <static>true</static>
 
@@ -12,11 +19,19 @@
         <collision name="floor_lower_collision">
           <pose>0 0 0.05 0 0 0</pose>
           <geometry><box><size>20.4 20.4 0.1</size></box></geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>3.0</mu>
+                <mu2>3.0</mu2>
+              </ode>
+            </friction>
+          </surface>
         </collision>
         <visual name="floor_lower_visual">
           <pose>0 0 0.05 0 0 0</pose>
           <geometry><box><size>20.4 20.4 0.1</size></box></geometry>
-          <material><ambient>0.7 0.5 0.3 1</ambient></material>
+          <material><ambient>0.9 0.9 0.9 1</ambient></material>
         </visual>
 
         <!-- 上层地板：为斜坡留出长条洞口 x∈[-0.75,0.75], y∈[-5.6,5.6] -->
@@ -24,6 +39,14 @@
         <collision name="floor_upper_left_block_collision">
           <pose>-5.375 0 3.1 0 0 0</pose>
           <geometry><box><size>9.25 20.0 0.1</size></box></geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>3.0</mu>
+                <mu2>3.0</mu2>
+              </ode>
+            </friction>
+          </surface>
         </collision>
         <visual name="floor_upper_left_block_visual">
           <pose>-5.375 0 3.1 0 0 0</pose>
@@ -34,6 +57,14 @@
         <collision name="floor_upper_right_block_collision">
           <pose>5.375 0 3.1 0 0 0</pose>
           <geometry><box><size>9.25 20.0 0.1</size></box></geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>3.0</mu>
+                <mu2>3.0</mu2>
+              </ode>
+            </friction>
+          </surface>
         </collision>
         <visual name="floor_upper_right_block_visual">
           <pose>5.375 0 3.1 0 0 0</pose>
@@ -44,6 +75,14 @@
         <collision name="floor_upper_front_fill_collision">
           <pose>0 -7.9 3.1 0 0 0</pose>
           <geometry><box><size>1.5 4.2 0.1</size></box></geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>3.0</mu>
+                <mu2>3.0</mu2>
+              </ode>
+            </friction>
+          </surface>
         </collision>
         <visual name="floor_upper_front_fill_visual">
           <pose>0 -7.9 3.1 0 0 0</pose>
@@ -54,6 +93,14 @@
         <collision name="floor_upper_back_fill_collision">
           <pose>0 7.8 3.1 0 0 0</pose>
           <geometry><box><size>1.5 4.4 0.1</size></box></geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>3.0</mu>
+                <mu2>3.0</mu2>
+              </ode>
+            </friction>
+          </surface>
         </collision>
         <visual name="floor_upper_back_fill_visual">
           <pose>0 7.8 3.1 0 0 0</pose>
@@ -117,11 +164,19 @@
         <collision name="ramp_collision">
           <pose>0 0 1.6 -0.2618 0 0</pose>
           <geometry><box><size>1.5 12 0.01</size></box></geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>3.0</mu>
+                <mu2>3.0</mu2>
+              </ode>
+            </friction>
+          </surface>
         </collision>
         <visual name="ramp_visual">
           <pose>0 0 1.6 -0.2618 0 0</pose>
           <geometry><box><size>1.5 12 0.01</size></box></geometry>
-          <material><ambient>0.5 0.3 0.1 1</ambient></material>
+          <material><ambient>0.9 0.9 0.9 1</ambient></material>
         </visual>
       </link>
 
