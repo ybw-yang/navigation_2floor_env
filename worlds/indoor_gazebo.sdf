@@ -38,7 +38,7 @@
         <!-- 左块（x< -0.75） -->
         <collision name="floor_upper_left_block_collision">
           <pose>-5.375 0 3.1 0 0 0</pose>
-          <geometry><box><size>9.25 20.0 0.1</size></box></geometry>
+          <geometry><box><size>9.25 20.0 0.08</size></box></geometry>
           <surface>
             <friction>
               <ode>
@@ -50,13 +50,13 @@
         </collision>
         <visual name="floor_upper_left_block_visual">
           <pose>-5.375 0 3.1 0 0 0</pose>
-          <geometry><box><size>9.25 20.0 0.1</size></box></geometry>
+          <geometry><box><size>9.25 20.0 0.08</size></box></geometry>
           <material><ambient>0.9 0.9 0.9 1</ambient></material>
         </visual>
         <!-- 右块（x> 0.75） -->
         <collision name="floor_upper_right_block_collision">
           <pose>5.375 0 3.1 0 0 0</pose>
-          <geometry><box><size>9.25 20.0 0.1</size></box></geometry>
+          <geometry><box><size>9.25 20.0 0.08</size></box></geometry>
           <surface>
             <friction>
               <ode>
@@ -68,13 +68,13 @@
         </collision>
         <visual name="floor_upper_right_block_visual">
           <pose>5.375 0 3.1 0 0 0</pose>
-          <geometry><box><size>9.25 20.0 0.1</size></box></geometry>
+          <geometry><box><size>9.25 20.0 0.08</size></box></geometry>
           <material><ambient>0.9 0.9 0.9 1</ambient></material>
         </visual>
-        <!-- 前填充块（y<-5.6，填补洞口下方） -->
+        <!-- 前填充块（y<-7.0，填补洞口下方） -->
         <collision name="floor_upper_front_fill_collision">
-          <pose>0 -7.9 3.1 0 0 0</pose>
-          <geometry><box><size>1.5 4.2 0.1</size></box></geometry>
+          <pose>0 -9.0 3.1 0 0 0</pose>
+          <geometry><box><size>1.5 2.0 0.08</size></box></geometry>
           <surface>
             <friction>
               <ode>
@@ -85,14 +85,15 @@
           </surface>
         </collision>
         <visual name="floor_upper_front_fill_visual">
-          <pose>0 -7.9 3.1 0 0 0</pose>
-          <geometry><box><size>1.5 4.2 0.1</size></box></geometry>
+          <pose>0 -9.0 3.1 0 0 0</pose>
+          <geometry><box><size>1.5 2.0 0.08</size></box></geometry>
           <material><ambient>0.9 0.9 0.9 1</ambient></material>
         </visual>
-        <!-- 后填充块（y> 5.6，填补洞口上方） -->
+
+        <!-- 后填充块（y>7.0，填补洞口上方） -->
         <collision name="floor_upper_back_fill_collision">
-          <pose>0 7.8 3.1 0 0 0</pose>
-          <geometry><box><size>1.5 4.4 0.1</size></box></geometry>
+          <pose>0 8.5 3.1 0 0 0</pose>
+          <geometry><box><size>1.5 3.0 0.08</size></box></geometry>
           <surface>
             <friction>
               <ode>
@@ -103,8 +104,8 @@
           </surface>
         </collision>
         <visual name="floor_upper_back_fill_visual">
-          <pose>0 7.8 3.1 0 0 0</pose>
-          <geometry><box><size>1.5 4.4 0.1</size></box></geometry>
+          <pose>0 8.5 3.1 0 0 0</pose>
+          <geometry><box><size>1.5 3.0 0.08</size></box></geometry>
           <material><ambient>0.9 0.9 0.9 1</ambient></material>
         </visual>
 
@@ -160,10 +161,10 @@
         <collision name="wall_U_office4"><pose>8.5 8.5 4.6 0 0 0</pose><geometry><box><size>2.0 0.15 2.8</size></box></geometry></collision>
         <visual name="wall_U_office4_vis"><pose>8.5 8.5 4.6 0 0 0</pose><geometry><box><size>2.0 0.15 2.8</size></box></geometry><material><ambient>0.9 0.9 0.85 1</ambient></material></visual>
 
-        <!-- 15° 斜坡（绕 X 轴旋转 -15°，roll） -->
-        <collision name="ramp_collision">
-          <pose>0 0 1.6 -0.2618 0 0</pose>
-          <geometry><box><size>1.5 12 0.01</size></box></geometry>
+        <!-- ========== 底部过渡段（7.5°，长2.0m） ========== -->
+        <collision name="ramp_bottom_collision">
+          <pose>0 5.0 0.11 -0.1309 0 0</pose>
+          <geometry><box><size>1.5 2.4 0.01</size></box></geometry>
           <surface>
             <friction>
               <ode>
@@ -173,10 +174,48 @@
             </friction>
           </surface>
         </collision>
-        <visual name="ramp_visual">
-          <pose>0 0 1.6 -0.2618 0 0</pose>
-          <geometry><box><size>1.5 12 0.01</size></box></geometry>
-          <material><ambient>0.9 0.9 0.9 1</ambient></material>
+        <visual name="ramp_bottom_visual">
+          <pose>0 5.0 0.11 -0.1309 0 0</pose>
+          <geometry><box><size>1.5 2.4 0.01</size></box></geometry>
+          <material><ambient>0.6 0.4 0.2 1</ambient></material>
+        </visual>
+
+        <!-- ========== 中间主段（15°，长10.0m） ========== -->
+        <collision name="ramp_main_collision">
+          <pose>0 -0.98 1.55 -0.2618 0 0</pose>
+          <geometry><box><size>1.5 10.0 0.01</size></box></geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>3.0</mu>
+                <mu2>3.0</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="ramp_main_visual">
+          <pose>0 -0.98 1.55 -0.2618 0 0</pose>
+          <geometry><box><size>1.5 10.0 0.01</size></box></geometry>
+          <material><ambient>0.6 0.4 0.2 1</ambient></material>
+        </visual>
+
+        <!-- ========== 顶部过渡段（7.5°，长2.0m） ========== -->
+        <collision name="ramp_top_collision">
+          <pose>0 -6.9 2.99 -0.1309 0 0</pose>
+          <geometry><box><size>1.5 2.2 0.01</size></box></geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>3.0</mu>
+                <mu2>3.0</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="ramp_top_visual">
+          <pose>0 -6.9 2.99 -0.1309 0 0</pose>
+          <geometry><box><size>1.5 2.2 0.01</size></box></geometry>
+          <material><ambient>0.6 0.4 0.2 1</ambient></material>
         </visual>
       </link>
 
