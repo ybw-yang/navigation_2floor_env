@@ -47,7 +47,7 @@
     <link name="imu_link">
       <sensor name="tb3_imu" type="imu">
         <always_on>true</always_on>
-        <update_rate>2000</update_rate>
+        <update_rate>100</update_rate>
         <imu>
           <angular_velocity>
             <x>
@@ -180,7 +180,7 @@
         <always_on>true</always_on>
         <visualize>false</visualize>
         <pose>0.1 0 0.15 0 -1.5708 0</pose>
-        <update_rate>100</update_rate>
+        <update_rate>10</update_rate>
         <ray>
           <scan>
             <horizontal>
@@ -217,7 +217,7 @@
     </link>
 
     <!-- Back LiDAR Link - 360x90, 朝后 -->
-    <link name="back_lidar_link">
+    <!-- <link name="back_lidar_link">
       <inertial>
         <pose>-0.18 0 0.15 0 0 0</pose>
         <inertia>
@@ -255,7 +255,7 @@
         </material>
       </visual>
 
-      <sensor name="back_lidar" type="ray">
+        <sensor name="back_lidar" type="ray">
         <always_on>true</always_on>
         <visualize>false</visualize>
         <pose>-0.18 0 0.15 0 -1.5708 0</pose>
@@ -293,7 +293,7 @@
           <frame_name>back_lidar_link</frame_name>
         </plugin>
       </sensor>
-    </link>
+    </link> -->
 
     <link name="wheel_left_link">
 
@@ -602,14 +602,14 @@
       </axis>
     </joint>
 
-    <joint name="back_lidar_joint" type="fixed">
+    <!-- <joint name="back_lidar_joint" type="fixed">
       <parent>base_link</parent>
       <child>back_lidar_link</child>
       <pose>-0.18 0 0.15 0 0 0</pose>
       <axis>
         <xyz>0 0 1</xyz>
       </axis>
-    </joint>
+    </joint> -->
 
     <joint name="camera_joint" type="fixed">
       <parent>base_link</parent>

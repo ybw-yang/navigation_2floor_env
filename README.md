@@ -61,6 +61,17 @@ source install/setup.bash
 ```bash
 ros2 launch navigation_2floor_env spawn_turtlebot.launch.py
 ```
+### install the dlo3d
+```bash
+cd ~/navigation_ws/src
+git clone git@github.com:ybw-yang/dlo3d.git -b navigation_2floor_env_sim
+cd ~/navigation_ws
+colcon build
+```
+### launch the dlo3d
+```bash
+ros2 launch dlio dlo3d_launch.py
+```
 
 This will:
 1. Start Gazebo server with the indoor environment
