@@ -261,4 +261,75 @@
   </joint>
   <link name="camera_depth_optical_frame"/>
 
+  <!-- ============ Front downward depth camera (face front, pitch down 45 deg) ============ -->
+  <!-- mount frame on base_link: face +X (front), pitched 45deg down (matches SDF) -->
+  <joint name="camera_front_joint" type="fixed">
+    <origin xyz="0.08 0.0 0.3" rpy="0 0.610 0"/>
+    <parent link="base_link"/>
+    <child link="camera_front_link"/>
+  </joint>
+  <link name="camera_front_link"/>
+
+  <!-- optical frame: standard ROS optical convention (z forward, x right, y down) -->
+  <joint name="camera_front_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/>
+    <parent link="camera_front_link"/>
+    <child link="camera_front_optical_frame"/>
+  </joint>
+  <link name="camera_front_optical_frame"/>
+
+  <joint name="camera_front_depth_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="camera_front_optical_frame"/>
+    <child link="camera_front_depth_optical_frame"/>
+  </joint>
+  <link name="camera_front_depth_optical_frame"/>
+
+  <!-- ============ Left downward depth camera (face left +Y, pitch down 45 deg) ============ -->
+  <!-- mount frame on base_link: yaw +90 to face +Y, then pitch 45deg down (matches SDF) -->
+  <joint name="camera_left_joint" type="fixed">
+    <origin xyz="0.08 0.10 0.3" rpy="0 0.785398 1.5708"/>
+    <parent link="base_link"/>
+    <child link="camera_left_link"/>
+  </joint>
+  <link name="camera_left_link"/>
+
+  <!-- optical frame: standard ROS optical convention (z forward, x right, y down) -->
+  <joint name="camera_left_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/>
+    <parent link="camera_left_link"/>
+    <child link="camera_left_optical_frame"/>
+  </joint>
+  <link name="camera_left_optical_frame"/>
+
+  <joint name="camera_left_depth_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="camera_left_optical_frame"/>
+    <child link="camera_left_depth_optical_frame"/>
+  </joint>
+  <link name="camera_left_depth_optical_frame"/>
+
+  <!-- ============ Right downward depth camera (face right -Y, pitch down 45 deg) ============ -->
+  <!-- mount frame on base_link: yaw -90 to face -Y, then pitch 45deg down (matches SDF) -->
+  <joint name="camera_right_joint" type="fixed">
+    <origin xyz="0.08 -0.10 0.3" rpy="0 0.785398 -1.5708"/>
+    <parent link="base_link"/>
+    <child link="camera_right_link"/>
+  </joint>
+  <link name="camera_right_link"/>
+
+  <joint name="camera_right_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/>
+    <parent link="camera_right_link"/>
+    <child link="camera_right_optical_frame"/>
+  </joint>
+  <link name="camera_right_optical_frame"/>
+
+  <joint name="camera_right_depth_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="camera_right_optical_frame"/>
+    <child link="camera_right_depth_optical_frame"/>
+  </joint>
+  <link name="camera_right_depth_optical_frame"/>
+
 </robot>

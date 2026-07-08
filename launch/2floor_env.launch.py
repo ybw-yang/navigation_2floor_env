@@ -24,6 +24,7 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch.actions import SetEnvironmentVariable
+from launch_ros.actions import Node
 
 def generate_launch_description():
     launch_file_dir = os.path.join(get_package_share_directory('navigation_2floor_env'), 'launch')
@@ -34,7 +35,7 @@ def generate_launch_description():
     # y_pose = LaunchConfiguration('y_pose', default='-9.0')
     # z_pose = LaunchConfiguration('z_pose', default='3.2')
     x_pose = LaunchConfiguration('x_pose', default='0.0')
-    y_pose = LaunchConfiguration('y_pose', default='-9.0')
+    y_pose = LaunchConfiguration('y_pose', default='9.0')
     z_pose = LaunchConfiguration('z_pose', default='0.15')
 
 
@@ -74,9 +75,32 @@ def generate_launch_description():
             'z_pose': z_pose,
         }.items()
     )
-
+    static_tf_cmds = [
+        Node(
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            arguments=[
+                '--x', '0.18', '--y', '0', '--z', '0.15',
+                '--roll', '0', '--pitch', '-1.5708', '--yaw', '0',
+                '--frame-id', 'base_link', '--child-frame-id', 'front_lidar_link'
+            ],
+            name='static_tf_front_lidar'
+        ),
+        Node(
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            arguments=[
+                '--x', '-0.18', '--y', '0', '--z', '0.15',
+                '--roll', '0', '--pitch', '-1.5708', '--yaw', '0',
+                '--frame-id', 'base_link', '--child-frame-id', 'back_lidar_link'
+            ],
+            name='static_tf_back_lidar'
+        ),
+    ]
     ld = LaunchDescription()
-
+    # 添加到LaunchDescription：
+    for cmd in static_tf_cmds:
+        ld.add_action(cmd)
     # Add the commands to the launch description
     ld.add_action(gzserver_cmd)
     ld.add_action(gzclient_cmd)

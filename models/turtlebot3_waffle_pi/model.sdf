@@ -491,7 +491,7 @@
 
     <link name="camera_rgb_optical_frame">
       <inertial>
-        <pose>0.076 0.0 0.093 0 0 0</pose>
+        <pose>0.076 0.0 0.293 0 0 0</pose>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0.000</ixy>
@@ -503,7 +503,7 @@
         <mass>0.035</mass>
       </inertial>
 
-      <pose>0.076 0.0 0.093 0 0 0</pose>
+      <pose>0.076 0.0 0.293 0 0 0</pose>
       <sensor name="camera" type="depth">
         <always_on>true</always_on>
         <visualize>true</visualize>
@@ -567,7 +567,160 @@
           <min_depth>0.001</min_depth>
         </plugin>
       </sensor>
-    </link>    
+    </link>
+
+    <!-- ============ Front downward depth camera (face front, pitch down 45 deg) ============ -->
+    <link name="camera_front_link">
+      <inertial>
+        <pose>0.08 0.0 0.3 0 0.61 0</pose>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0.000</ixy>
+          <ixz>0.000</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0.000</iyz>
+          <izz>0.001</izz>
+        </inertia>
+        <mass>0.035</mass>
+      </inertial>
+
+      <!-- pose relative to base_link: face +X (front), pitched 45deg downward -->
+      <pose>0.08 0.0 0.3 0 0.61 0</pose>
+      <sensor name="camera_front" type="depth">
+        <always_on>true</always_on>
+        <visualize>false</visualize>
+        <update_rate>15</update_rate>
+        <camera name="intel_realsense_d455_front">
+          <horizontal_fov>1.02974</horizontal_fov>
+          <image>
+            <width>720</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <plugin name="rgbd_plugin_front" filename="libgazebo_ros_camera.so">
+          <ros>
+            <argument>/camera_front/depth/image_raw:=camera_front/depth/image_rect_raw</argument>
+            <argument>/camera_front/points:=/camera_front/depth/color/points</argument>
+          </ros>
+          <camera_name>camera_front</camera_name>
+          <frame_name>camera_front_depth_optical_frame</frame_name>
+          <hack_baseline>0.07</hack_baseline>
+          <min_depth>0.001</min_depth>
+        </plugin>
+      </sensor>
+    </link>
+
+    <!-- ============ Left downward depth camera (face left +Y, pitch down 45 deg) ============ -->
+    <link name="camera_left_link">
+      <inertial>
+        <pose>0.08 0.10 0.3 0 0.785398 1.5708</pose>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0.000</ixy>
+          <ixz>0.000</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0.000</iyz>
+          <izz>0.001</izz>
+        </inertia>
+        <mass>0.035</mass>
+      </inertial>
+
+      <!-- pose relative to base_link: face +Y (left), pitched 45deg downward -->
+      <pose>0.08 0.10 0.3 0 0.785398 1.5708</pose>
+      <sensor name="camera_left" type="depth">
+        <always_on>true</always_on>
+        <visualize>false</visualize>
+        <update_rate>15</update_rate>
+        <camera name="intel_realsense_d455_left">
+          <horizontal_fov>1.02974</horizontal_fov>
+          <image>
+            <width>720</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <plugin name="rgbd_plugin_left" filename="libgazebo_ros_camera.so">
+          <ros>
+            <argument>/camera_left/depth/image_raw:=camera_left/depth/image_rect_raw</argument>
+            <argument>/camera_left/points:=/camera_left/depth/color/points</argument>
+          </ros>
+          <camera_name>camera_left</camera_name>
+          <frame_name>camera_left_depth_optical_frame</frame_name>
+          <hack_baseline>0.07</hack_baseline>
+          <min_depth>0.001</min_depth>
+        </plugin>
+      </sensor>
+    </link>
+
+    <!-- ============ Right downward depth camera (face right -Y, pitch down 45 deg) ============ -->
+    <link name="camera_right_link">
+      <inertial>
+        <pose>0.08 -0.10 0.3 0 0.785398 -1.5708</pose>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0.000</ixy>
+          <ixz>0.000</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0.000</iyz>
+          <izz>0.001</izz>
+        </inertia>
+        <mass>0.035</mass>
+      </inertial>
+
+      <!-- pose relative to base_link: face -Y (right), pitched 45deg downward -->
+      <pose>0.08 -0.10 0.3 0 0.785398 -1.5708</pose>
+      <sensor name="camera_right" type="depth">
+        <always_on>true</always_on>
+        <visualize>false</visualize>
+        <update_rate>15</update_rate>
+        <camera name="intel_realsense_d455_right">
+          <horizontal_fov>1.02974</horizontal_fov>
+          <image>
+            <width>720</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <plugin name="rgbd_plugin_right" filename="libgazebo_ros_camera.so">
+          <ros>
+            <argument>/camera_right/depth/image_raw:=camera_right/depth/image_rect_raw</argument>
+            <argument>/camera_right/points:=/camera_right/depth/color/points</argument>
+          </ros>
+          <camera_name>camera_right</camera_name>
+          <frame_name>camera_right_depth_optical_frame</frame_name>
+          <hack_baseline>0.07</hack_baseline>
+          <min_depth>0.001</min_depth>
+        </plugin>
+      </sensor>
+    </link>
 
     <joint name="base_joint" type="fixed">
       <parent>base_footprint</parent>
@@ -661,6 +814,27 @@
       <parent>camera_rgb_optical_frame</parent>
       <child>camera_depth_optical_frame</child>
       <pose>0.0 0.0 0.0 0 0 0</pose>
+    </joint>
+
+    <!-- Front downward camera joint -->
+    <joint name="camera_front_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>camera_front_link</child>
+      <pose>0.08 0.0 0.3 0 0.610 0</pose>
+    </joint>
+
+    <!-- Left downward camera joint -->
+    <joint name="camera_left_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>camera_left_link</child>
+      <pose>0.08 0.10 0.3 0 0.785398 1.5708</pose>
+    </joint>
+
+    <!-- Right downward camera joint -->
+    <joint name="camera_right_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>camera_right_link</child>
+      <pose>0.08 -0.10 0.3 0 0.785398 -1.5708</pose>
     </joint>
 
     <plugin name="turtlebot3_diff_drive" filename="libgazebo_ros_diff_drive.so">
