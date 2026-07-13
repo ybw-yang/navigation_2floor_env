@@ -119,6 +119,10 @@
         <collision name="wall_right_collision"><pose>10.1 0 3.1 0 0 0</pose><geometry><box><size>0.2 20.4 6.2</size></box></geometry></collision>
         <visual name="wall_right_visual"><pose>10.1 0 3.1 0 0 0</pose><geometry><box><size>0.2 20.4 6.2</size></box></geometry><material><ambient>0.95 0.95 0.95 0.3</ambient><diffuse>0.95 0.95 0.95 0.3</diffuse></material></visual>
 
+        <!-- 二楼天花板/顶盖（半透明，透明度与外墙一致 alpha=0.3），顶面与外墙顶 z=6.2 齐平 -->
+        <collision name="ceiling_upper_collision"><pose>0 0 6.15 0 0 0</pose><geometry><box><size>20.4 20.4 0.1</size></box></geometry></collision>
+        <visual name="ceiling_upper_visual"><pose>0 0 6.15 0 0 0</pose><geometry><box><size>20.4 20.4 0.1</size></box></geometry><material><ambient>0.95 0.95 0.95 0.3</ambient><diffuse>0.95 0.95 0.95 0.3</diffuse></material></visual>
+
         <!-- 下层隔墙（中央横墙开口 4m） -->
         <collision name="wall_L1_H1_left"><pose>-5.85 4.5 1.5 0 0 0</pose><geometry><box><size>7.7 0.15 2.8</size></box></geometry></collision>
         <visual name="wall_L1_H1_left_vis"><pose>-5.85 4.5 1.5 0 0 0</pose><geometry><box><size>7.7 0.15 2.8</size></box></geometry><material><ambient>0.9 0.9 0.85 1</ambient></material></visual>
