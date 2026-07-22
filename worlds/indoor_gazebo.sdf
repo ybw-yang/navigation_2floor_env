@@ -221,6 +221,18 @@
           <geometry><box><size>1.5 2.2 0.01</size></box></geometry>
           <material><ambient>0.6 0.4 0.2 1</ambient></material>
         </visual>
+
+        <!-- ========== 斜坡起止段两侧护栏（各 1m 长、高出坡面 0.3m；随坡面倾角安放，x=±0.75 坡沿） ========== -->
+        <!-- 起始段（底部过渡段 Y≈5.0, 7.5°）左右两侧 -->
+        <collision name="rail_start_xpos_collision"><pose>0.75 5.0202 0.2637 -0.1309 0 0</pose><geometry><box><size>0.05 2.0 0.15</size></box></geometry></collision>
+        <visual name="rail_start_xpos_visual"><pose>0.75 5.0202 0.2637 -0.1309 0 0</pose><geometry><box><size>0.05 2.0 0.15</size></box></geometry><material><ambient>0.85 0.3 0.1 1</ambient></material></visual>
+        <collision name="rail_start_xneg_collision"><pose>-0.75 5.0202 0.2637 -0.1309 0 0</pose><geometry><box><size>0.05 2.0 0.15</size></box></geometry></collision>
+        <visual name="rail_start_xneg_visual"><pose>-0.75 5.0202 0.2637 -0.1309 0 0</pose><geometry><box><size>0.05 2.0 0.15</size></box></geometry><material><ambient>0.85 0.3 0.1 1</ambient></material></visual>
+        <!-- 结束段（顶部过渡段 Y≈-6.9, 7.5°）左右两侧 -->
+        <collision name="rail_end_xpos_collision"><pose>0.75 -6.8798 3.1437 -0.1309 0 0</pose><geometry><box><size>0.05 2.0 0.15</size></box></geometry></collision>
+        <visual name="rail_end_xpos_visual"><pose>0.75 -6.8798 3.1437 -0.1309 0 0</pose><geometry><box><size>0.05 2.0 0.15</size></box></geometry><material><ambient>0.85 0.3 0.1 1</ambient></material></visual>
+        <collision name="rail_end_xneg_collision"><pose>-0.75 -6.8798 3.1437 -0.1309 0 0</pose><geometry><box><size>0.05 2.0 0.15</size></box></geometry></collision>
+        <visual name="rail_end_xneg_visual"><pose>-0.75 -6.8798 3.1437 -0.1309 0 0</pose><geometry><box><size>0.05 2.0 0.15</size></box></geometry><material><ambient>0.85 0.3 0.1 1</ambient></material></visual>
       </link>
 
       <!-- 下层家具（几乎未变，仅将离斜坡过近的个别物品稍移） -->
